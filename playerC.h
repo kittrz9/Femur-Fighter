@@ -1,5 +1,6 @@
 #ifndef PLAYERC_H
 #define PLAYERC_H
+#include <cmath>
 
 enum dir{UP, RIGHT, LEFT};
 
@@ -30,7 +31,7 @@ class playerC {
 
         void jump();
 
-        void punch(dir d, playerC* hitPlayer);
+        void punch(dir d, playerC* hitPlayer, float hitboxXPos, float hitboxYpos);
 
         void reset(float x, float y);
 

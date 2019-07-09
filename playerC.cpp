@@ -75,25 +75,30 @@ void playerC::jump() {
 }
 
 
-void playerC::punch(dir d, playerC* hitPlayer){
-    switch(d){
-        case LEFT:
-            hitPlayer->xVel = -20;
-            hitPlayer->yVel = 10;
-            if(!hitPlayer->invulnerable)
-                hitPlayer->health -= 5;
-            break;
-        case RIGHT:
-            hitPlayer->xVel = 20;
-            hitPlayer->yVel = 10;
-            if(!hitPlayer->invulnerable)
-                hitPlayer->health -= 5;
-            break;
-        case UP:
-            hitPlayer->yVel = 20;
-            if(!hitPlayer->invulnerable)
-                hitPlayer->health -= 10;
-            break;
+void playerC::punch(dir d, playerC* hitPlayer, float hitboxXPos, float hitboxYPos){
+    if(((std::abs(hitPlayer->xPos - hitboxXPos) * 2 < (screenW/15 + screenH/20)) &&
+        (std::abs((hitPlayer->yPos - screenH/5) - hitboxYPos) * 2 < (screenH/5 + screenW/20))) &&
+         !hitPlayer->hit){
+        switch(d){
+            case LEFT:
+                hitPlayer->xVel = -20;
+                hitPlayer->yVel = 10;
+                if(!hitPlayer->invulnerable)
+                    hitPlayer->health -= 5;
+                break;
+            case RIGHT:
+                hitPlayer->xVel = 20;
+                hitPlayer->yVel = 10;
+                if(!hitPlayer->invulnerable)
+                    hitPlayer->health -= 5;
+                break;
+            case UP:
+                hitPlayer->yVel = 20;
+                if(!hitPlayer->invulnerable)
+                    hitPlayer->health -= 10;
+                break;
+        }
+        hitPlayer->hit = true;
     }
 }
 
@@ -104,4 +109,5 @@ void playerC::reset(float x, float y){
     yVel = 0;
     dashing = false;
     jumping = false;
+    health = 100;
 }

@@ -130,13 +130,8 @@ int main() {
                             float hitboxXPos = player.xPos - SCREENW/20;
                             float hitboxYPos = player.yPos - SCREENH/7;
                             playerHitbox.setPosition(hitboxXPos, hitboxYPos);
-                            if(((abs(player2.xPos - hitboxXPos) * 2 < (SCREENW/15 + SCREENW/20)) &&
-                                (abs((player2.yPos - SCREENH/5) - hitboxYPos) * 2 < (SCREENH/5 + SCREENW/20))) &&
-                                 !player2.hit){
-                                player.punch(LEFT, &player2);
-                                player2.hit = true;
-                                hitTimer2.restart();
-                            }
+                            player.punch(LEFT, &player2, hitboxXPos, hitboxYPos);
+                            hitTimer2.restart();
                             hitboxTimer.restart();
                             break;
                             }
@@ -145,13 +140,8 @@ int main() {
                             float hitboxXPos = player.xPos + SCREENW/20;
                             float hitboxYPos = player.yPos - SCREENH/7;
                             playerHitbox.setPosition(hitboxXPos, hitboxYPos);
-                            if(((abs(player2.xPos - hitboxXPos) * 2 < (SCREENW/15 + SCREENW/20)) &&
-                                (abs((player2.yPos - SCREENH/5) - hitboxYPos) * 2 < (SCREENH/5 + SCREENW/20))) &&
-                                 !player2.hit){
-                                player.punch(RIGHT, &player2);
-                                player2.hit = true;
-                                hitTimer2.restart();
-                            }
+                            player.punch(RIGHT, &player2, hitboxXPos, hitboxYPos);
+                            hitTimer2.restart();
                             hitboxTimer.restart();
                             break;
                             }
@@ -160,13 +150,8 @@ int main() {
                             float hitboxXPos = player.xPos;
                             float hitboxYPos = player.yPos - SCREENH/5 - SCREENW/40;
                             playerHitbox.setPosition(hitboxXPos, hitboxYPos);
-                            if(((abs(player2.xPos - hitboxXPos) * 2 < (SCREENW/15 + SCREENW/20)) &&
-                                (abs((player2.yPos - SCREENH/5) - hitboxYPos) * 2 < (SCREENH/5 + SCREENW/20))) &&
-                                 !player2.hit){
-                                player.punch(UP, &player2);
-                                player2.hit = true;
-                                hitTimer2.restart();
-                            }
+                            player.punch(UP, &player2, hitboxXPos, hitboxYPos);
+                            hitTimer2.restart();
                             hitboxTimer.restart();
                             break;
                             }
@@ -176,13 +161,8 @@ int main() {
                             float hitboxXPos = player2.xPos - SCREENW/20;
                             float hitboxYPos = player2.yPos - SCREENH/7;
                             playerHitbox2.setPosition(hitboxXPos, hitboxYPos);
-                            if(((abs(player.xPos - hitboxXPos) * 2 < (SCREENW/15 + SCREENW/20)) &&
-                                (abs((player.yPos - SCREENH/5) - hitboxYPos) * 2 < (SCREENH/5 + SCREENW/20))) &&
-                                 !player.hit){
-                                player2.punch(LEFT, &player);
-                                player.hit = true;
-                                hitTimer1.restart();
-                            }
+                            player.punch(LEFT, &player, hitboxXPos, hitboxYPos);
+                            hitTimer1.restart();
                             hitboxTimer2.restart();
                             break;
                         }
@@ -207,8 +187,6 @@ int main() {
             player.hit = false;
 
         if(player2.health <= 0 || player.health <= 0){
-            player.health = 100;
-            player2.health = 100;
             player.reset(2*(SCREENW/3) , SCREENH/2);
             player2.reset(SCREENW/3 , SCREENH/2);
         }
